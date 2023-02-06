@@ -4,10 +4,14 @@ import { CyclesContext } from "../..";
 import { CountdownContainer, Separator } from "./styles";
 
 const Countdown = () => {
-  const { activeCycle, activeCycleId, markCurrentCycleAsFinished } =
-    useContext(CyclesContext);
+  const {
+    activeCycle,
+    activeCycleId,
+    markCurrentCycleAsFinished,
+    amountSecondsPassed,
+    setSecondsPassed,
+  } = useContext(CyclesContext);
 
-  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
 
   useEffect(() => {
@@ -15,17 +19,18 @@ const Countdown = () => {
 
     if (activeCycle) {
       interval = setInterval(() => {
-        const secondsDefference = differenceInSeconds(
+        const secondsDifference = differenceInSeconds(
           new Date(),
           activeCycle.startDate
         );
 
-        if (secondsDefference >= totalSeconds) {
+        if (secondsDifference >= totalSeconds) {
           markCurrentCycleAsFinished();
-          setAmountSecondsPassed(totalSeconds);
+
+          setSecondsPassed(totalSeconds);
           clearInterval(interval);
         } else {
-          setAmountSecondsPassed(secondsDefference);
+          setSecondsPassed(secondsDifference);
         }
       }, 1000);
     }
@@ -33,7 +38,13 @@ const Countdown = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [activeCycle, totalSeconds, activeCycleId, markCurrentCycleAsFinished]);
+  }, [
+    activeCycle,
+    totalSeconds,
+    activeCycleId,
+    setSecondsPassed,
+    markCurrentCycleAsFinished,
+  ]);
 
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
 
@@ -45,7 +56,7 @@ const Countdown = () => {
 
   useEffect(() => {
     if (activeCycle) {
-      document.title = `${minutes}:${seconds}  || Pedro Soares`;
+      document.title = `${minutes}:${seconds} | Pedro Saores`;
     }
   }, [minutes, seconds, activeCycle]);
 

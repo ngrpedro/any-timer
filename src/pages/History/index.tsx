@@ -6,7 +6,6 @@ import ptBR from "date-fns/locale/pt-BR";
 
 const History = () => {
   const { cycles } = useContext(CyclesContext);
-  console.log(cycles);
 
   return (
     <HistoryContainer>

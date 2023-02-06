@@ -51,7 +51,7 @@ export const Separator = styled("div", {
   justifyContent: "center",
 });
 
-export const StartCountdownButton = styled("button", {
+export const BaseCountdownButton = styled("button", {
   width: "100%",
   border: "0",
   padding: "1rem",
@@ -62,16 +62,27 @@ export const StartCountdownButton = styled("button", {
   gap: "0.5rem",
   fontWeight: "bold",
   cursor: "pointer",
-  background: "$green-500",
   color: "$gray-100",
 
   "&:disabled": {
     opacity: "0.7",
     cursor: "not-allowed",
   },
+});
+
+export const StartCountdownButton = styled(BaseCountdownButton, {
+  background: "$green-500",
 
   "&:not(:disabled):hover": {
     background: "$green-700",
+  },
+});
+
+export const StopCountdownButton = styled(BaseCountdownButton, {
+  background: "$red-500",
+
+  "&:not(:disabled):hover": {
+    background: "$red-700",
   },
 });
 

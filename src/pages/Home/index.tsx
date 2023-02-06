@@ -45,6 +45,11 @@ const Home = () => {
 
   const { handleSubmit, watch, formState, reset } = newCycleForm;
 
+  const handleCreateNewCycle = (data: NewCycleFormData) => {
+    createNewCycle(data);
+    reset();
+  };
+
   // TODO:: validar os erros na interface
   // console.log(formState.errors);
 
@@ -53,7 +58,7 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit(createNewCycle)}>
+      <form onSubmit={handleSubmit(handleCreateNewCycle)}>
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>

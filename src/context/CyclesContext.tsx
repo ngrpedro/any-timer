@@ -10,7 +10,7 @@ interface Cycle {
   task: string;
   minutesAmount: number;
   startDate: Date;
-  interruptDate?: Date;
+  interruptedDate?: Date;
   finishedDate?: Date;
 }
 
@@ -69,8 +69,6 @@ export function CyclesContextProvider({
     setCycles((state) => [...state, newCycle]);
     setActiveCycleId(id);
     setAmountSecondsPassed(0);
-
-    // reset()
   }
 
   function interruptCurrentCycle() {
